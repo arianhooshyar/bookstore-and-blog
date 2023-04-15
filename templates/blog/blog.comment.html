@@ -1,0 +1,20 @@
+{% extends '_base.html' %}
+
+
+{% block page_title %}
+    Comment page
+{% endblock %}
+
+
+{% block content %}
+    <br>
+    <h1>Add Comments :</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Add New Comment">
+    </form>
+    <br>
+    <a href="Book_list_view ">Book List</a>
+
+{% endblock %}

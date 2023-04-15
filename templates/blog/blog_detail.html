@@ -1,0 +1,47 @@
+{% extends '_base.html' %}
+
+{% block page_title %}
+    Blog Detail
+{% endblock %}
+
+{% block content %}
+    <h1>Blog name : {{ blogs.title }}</h1>
+    <h2>author : {{ blogs.author }}</h2>
+    <h3>text : {{ blogs.text }}</h3>
+    <br>
+    <br>
+    <h3>Status : {{ blogs.active }}</h3>
+    <h4>This blog create at {{ blogs.create_at }}</h4>
+    <h4>This blog update at {{ blogs.update_at }}</h4>
+    <h1>---------------------------</h1>
+
+    {% if user.is_authenticated %}
+        <button class="button" type="submit"><a href="{% url 'Blog_update_View' blogs.id %}">Update Detail</a></button>
+        <br>
+        <br>
+        <button class="button" type="submit"><a href="{% url 'Blog_delete_View' blogs.id %}">Delete Blog</a></button>
+        <br>
+        <br>
+        <button class="button" type="submit"><a href="{% url 'Blog_comment_view' blogs.id %}">Add comment</a></button>
+        <br>
+        <br>
+        <button class="button" type="submit"><a href="{% url 'Blog_List_View' %}">Blog List</a></button>
+
+    {% else %}
+        <p>before update and delete blog, you must be login</p>
+        <a class="nav-link active" aria-current="page" href="{% url 'login' %}">login</a>
+    {% endif %}
+    <br>
+    <h1>Comment : </h1>
+    {% for commen in object.comment.all %}
+        <h2> name : {{ commen.name }}</h2>
+        <h3>text : {{ commen.text }}</h3>
+        <h4>create at : {{ commen.create_at }}</h4>
+        <button class="button" type="submit"><a href="{% url 'Blog_comment_delete_view' commen.id %}">Delete Comment</a></button>
+
+        <h1>-------------------------</h1>
+    {% endfor %}
+
+
+
+{% endblock %}

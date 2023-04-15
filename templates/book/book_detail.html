@@ -1,0 +1,37 @@
+{% extends '_base.html' %}
+
+
+{% block page_title %}
+    Book Detail
+{% endblock %}
+
+{% block content %}
+
+    <h1>title : {{ books.title }}</h1>
+    <h2> author : {{ books.author }}</h2>
+    <h3>price : {{ books.price }}</h3>
+    <p>content : {{ books.content }}</p>
+    <h1>----------------------------------------------------------------------</h1>
+    {% for comment in comments %}
+        <h1>ddd</h1>
+    {% endfor %}
+    <button class="button" type="submit"><a href="{% url 'Book_list_view' %}">Back to Book List</a></button>
+    <br>
+    <br>
+    {% if user.is_authenticated %}
+        <button class="button" type="submit"><a href="{% url 'Book_update_view' books.id %}">Update Detail</a></button>
+        <br>
+        <br>
+        <br>
+        <br>
+        <button class="btn btn-info" type="submit"><a href="{% url 'Book_delete_view' books.id %}">Delete Book</a>
+        </button>
+
+    {% else %}
+        <p>before add, update and delete book, you must be login</p>
+        <a class="nav-link active" aria-current="page" href="{% url 'login' %}">login</a>
+
+    {% endif %}
+
+
+{% endblock %}
